@@ -33,10 +33,10 @@ public class LoginActivity extends Activity {
 
         user = new ParseUser();
 
-        userNameEditText = (EditText) findViewById(R.id.userNameEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        userNameEditText = (EditText) findViewById(R.id.login_username_editText);
+        passwordEditText = (EditText) findViewById(R.id.login_password_editText);
 
-        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton = (Button) findViewById(R.id.login_button);
         loginButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +44,15 @@ public class LoginActivity extends Activity {
             }
         });
 
+        signUpButton = (Button) findViewById(R.id.login_signup_button);
+        signUpButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -56,7 +65,9 @@ public class LoginActivity extends Activity {
             public void done(ParseUser parseUser, ParseException e) {
                 if (user != null) {
                     // Yeah! User is logged in!
-                    setResult(RESULT_OK);
+                    Toast.makeText(getApplicationContext(),
+                            "Login successful!",
+                            Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     // Signup borked, wrong credentials probs

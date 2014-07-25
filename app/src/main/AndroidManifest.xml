@@ -17,11 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
 
-            </activity>
+        </activity>
+
+        <activity
+            android:name=".SignupActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
+
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseUser;
@@ -53,7 +54,11 @@ public class MainActivity extends Activity{
         if(currentUser == null) {
             Intent intent = new Intent(this, LoginActivity.class);
 
-            startActivityForResult(intent, LOGIN_ACTIVITY_REQUEST_CODE);
+            //startActivityForResult(intent, LOGIN_ACTIVITY_REQUEST_CODE);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getApplicationContext(), "Welcome, " + currentUser.getUsername(),
+                    Toast.LENGTH_SHORT);
         }
 
         // Create the adapter that will return a fragment for each of the three
@@ -66,12 +71,12 @@ public class MainActivity extends Activity{
 
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == LOGIN_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 
         }
-    }
+    }*/
 
 
     @Override
