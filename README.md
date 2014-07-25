@@ -14,3 +14,8 @@ It uses the Parse backend.
 The purpose of this app is to be able to track member status during church services.
 This eliminates the large amounts of registers needed to manually look through to track attendance.
 It will be able to provide accurate analytics of members.
+
+####TODO
+Implement news feed
+User detail collection
+geolocation registration for communion registry
