@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="parse_app_id">5hgFCcYl3Lb5pA5vMB1yv9zSdYWqbh3LC22Xjbdd</string>
+    <string name="parse_client_key">YO53ftrMhbslFX3i3BAW1rtogC5PnrZXj0fGBFaU</string>
+    <string name="facebook_app_id">1429721627316448</string>
+    <string name="twitter_consumer_key">ttmf9tMOfP8Kn0ipkTxeqnQQ0</string>
+    <string name="twitter_consumer_secret">Xn4PuebKG03fEl9OZ6sDzElmtKC9kpxbyeUOfdS9fS0MkB5aci</string>
+
+    <string name="app_name">MyWorship</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="signup">Sign Up</string>
+
+</resources>
