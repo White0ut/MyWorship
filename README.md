@@ -16,6 +16,6 @@ This eliminates the large amounts of registers needed to manually look through t
 It will be able to provide accurate analytics of members.
 
 ####TODO
-Implement news feed
-User detail collection
-geolocation registration for communion registry
+-Implement news feed
+-User detail collection
+-geolocation registration for communion registry
