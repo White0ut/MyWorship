@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.res.Configuration;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -73,9 +74,9 @@ public class SignupActivity extends Activity {
 
                 user.setUsername(usernameEditText.getText().toString());
 
-                /*if(phoneEditText.getText() != null) {
+                if(phoneEditText.getText() != null) {
                     user.put("phone", phoneEditText.getText().toString());
-                }*/
+                }
 
                 user.signUpInBackground( new SignUpCallback() {
                     @Override
@@ -97,4 +98,5 @@ public class SignupActivity extends Activity {
 
 
     }
+
 }
