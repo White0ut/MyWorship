@@ -37,6 +37,11 @@ public class MainActivity extends Activity{
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    MenuItem logoutMenuItem;
+    MenuItem loginMenuItem;
+
+    ParseUser currentUser;
+
     private final int LOGIN_ACTIVITY_REQUEST_CODE = 1;
 
     /**
@@ -50,7 +55,7 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
 
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser = ParseUser.getCurrentUser();
         if(currentUser == null) {
             Intent intent = new Intent(this, LoginActivity.class);
 
@@ -58,8 +63,10 @@ public class MainActivity extends Activity{
             startActivity(intent);
         }else {
             Toast.makeText(getApplicationContext(), "Welcome, " + currentUser.getUsername(),
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -83,6 +90,9 @@ public class MainActivity extends Activity{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        loginMenuItem = menu.findItem(R.id.login_menu_item);
+        logoutMenuItem = menu.findItem(R.id.logout_menu_item);
+
         return true;
     }
 
@@ -92,10 +102,16 @@ public class MainActivity extends Activity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+
+        if (id == R.id.logout_menu_item) {
+            logout();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        ParseUser.logOut();
     }
 
     
@@ -120,7 +136,7 @@ public class MainActivity extends Activity{
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override

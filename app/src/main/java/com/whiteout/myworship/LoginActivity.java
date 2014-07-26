@@ -24,14 +24,16 @@ public class LoginActivity extends Activity {
     private Button loginButton;
     private Button signUpButton;
 
-    private ParseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        user = new ParseUser();
+        ParseUser user = new ParseUser();
+        if (user.isAuthenticated()) {
+            finish();
+        }
 
         userNameEditText = (EditText) findViewById(R.id.login_username_editText);
         passwordEditText = (EditText) findViewById(R.id.login_password_editText);
@@ -63,7 +65,7 @@ public class LoginActivity extends Activity {
         ParseUser.logInInBackground(userName, password, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if (user != null) {
+                if (parseUser != null) {
                     // Yeah! User is logged in!
                     Toast.makeText(getApplicationContext(),
                             "Login successful!",

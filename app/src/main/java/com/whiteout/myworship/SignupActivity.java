@@ -2,6 +2,7 @@ package com.whiteout.myworship;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,7 @@ public class SignupActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        user = new ParseUser();
+
 
         usernameEditText = (EditText) findViewById(R.id.signup_username_editText);
         passwordEditText = (EditText) findViewById(R.id.signup_password_editText);
@@ -65,13 +66,16 @@ public class SignupActivity extends Activity {
                             Toast.LENGTH_LONG).show();
                 }
 
+                // Register the user
+                user = new ParseUser();
+
                 user.setPassword(passwordEditText.getText().toString());
 
                 user.setUsername(usernameEditText.getText().toString());
 
-                if(phoneEditText.getText() != null) {
+                /*if(phoneEditText.getText() != null) {
                     user.put("phone", phoneEditText.getText().toString());
-                }
+                }*/
 
                 user.signUpInBackground( new SignUpCallback() {
                     @Override
@@ -82,6 +86,7 @@ public class SignupActivity extends Activity {
                             Toast.makeText(getApplicationContext(),
                                     "Signup unsuccessful:(",
                                     Toast.LENGTH_LONG).show();
+                            Log.e("MyWorship",e.getMessage());
                         }
                     }
                 });
