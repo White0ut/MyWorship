@@ -8,7 +8,11 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -37,6 +41,8 @@ public class MainActivity extends Activity{
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+
+    Menu menu;
     MenuItem logoutMenuItem;
     MenuItem loginMenuItem;
 
@@ -55,16 +61,26 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
 
 
-        currentUser = ParseUser.getCurrentUser();
-        if(currentUser == null) {
-            Intent intent = new Intent(this, LoginActivity.class);
+        if(savedInstanceState != null) {
+            // was rotated
+            //Toast.makeText(getApplicationContext(), "HEY! ROTATED", Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(getApplicationContext(), "HEY! NOT ROTATED", Toast.LENGTH_SHORT).show();
+            currentUser = ParseUser.getCurrentUser();
+            if(currentUser == null) {
 
-            //startActivityForResult(intent, LOGIN_ACTIVITY_REQUEST_CODE);
-            startActivity(intent);
-        }else {
-            Toast.makeText(getApplicationContext(), "Welcome, " + currentUser.getUsername(),
-                    Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Welcome, " + currentUser.getUsername(),
+                        Toast.LENGTH_SHORT).show();
+
+            }
         }
+
+
 
 
 
@@ -76,6 +92,29 @@ public class MainActivity extends Activity{
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (menu != null) {
+            loginMenuItem = menu.findItem(R.id.login_menu_item);
+            logoutMenuItem = menu.findItem(R.id.logout_menu_item);
+
+            if (ParseUser.getCurrentUser() == null) {
+                loginMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                logoutMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+            } else {
+                logoutMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                loginMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 /*    @Override
@@ -92,7 +131,15 @@ public class MainActivity extends Activity{
         getMenuInflater().inflate(R.menu.main, menu);
         loginMenuItem = menu.findItem(R.id.login_menu_item);
         logoutMenuItem = menu.findItem(R.id.logout_menu_item);
+        if (ParseUser.getCurrentUser() == null) {
+            loginMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            logoutMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+        } else {
+            logoutMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            loginMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
 
+        this.menu = menu;
         return true;
     }
 
@@ -104,14 +151,30 @@ public class MainActivity extends Activity{
         int id = item.getItemId();
 
         if (id == R.id.logout_menu_item) {
-            logout();
+            ParseUser.logOut();
+            item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+            if (menu != null) {
+                loginMenuItem = menu.findItem(R.id.login_menu_item);
+                loginMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            }
             return true;
+        }
+        if(id == R.id.login_menu_item) {
+            login();
+            item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
+            if (menu != null) {
+                logoutMenuItem = menu.findItem(R.id.logout_menu_item);
+                logoutMenuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void logout() {
-        ParseUser.logOut();
+
+
+    private void login() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     
