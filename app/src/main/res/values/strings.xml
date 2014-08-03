@@ -8,9 +8,6 @@
     <string name="twitter_consumer_secret">Xn4PuebKG03fEl9OZ6sDzElmtKC9kpxbyeUOfdS9fS0MkB5aci</string>
 
     <string name="app_name">MyWorship</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="logout">Logout</string>
@@ -21,5 +18,14 @@
     <string name="reenter_password">Re-Enter Password</string>
     <string name="email_signup">E-Mail for Recovery</string>
     <string name="phone_signup">Phone (optional)</string>
+
+    <!-- Pick church fragment values -->
+    <string name="pick_church_title">Select Your Church</string>
+
+    <string-array name="churches_array">
+        <item>Friedens - Kenosha</item>
+        <item>Our Savior - Oshtemo</item>
+        <item>Foo - Foo City</item>
+    </string-array>
 
 </resources>
