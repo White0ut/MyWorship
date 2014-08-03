@@ -14,7 +14,13 @@ import com.whiteout.myworship.fragments.EmptyFragment;
  */
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private static int NUM_ITEMS = 3;
-    // Sparse array to keep track of registered fragments in memory
+
+    /** Is a more memory efficient way to handle multiple Fragments
+        Unlike normal arrays of Objects, there can be gaps in the indices
+            WHY? -- because it avoids auto-boxing keys
+                    its data structure doesn't rely on an extra entry object for each mapping
+        developer.android.com/reference/android/util/SparseArray.html
+    */
     private SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
