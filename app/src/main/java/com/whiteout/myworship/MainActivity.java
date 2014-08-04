@@ -7,13 +7,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.parse.ParseUser;
 import com.whiteout.myworship.adapters.MyPagerAdapter;
 
-import com.viewpagerindicator.TitlePageIndicator;
 
 
 

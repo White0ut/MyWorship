@@ -1,15 +1,13 @@
 package com.whiteout.myworship;
 
 import android.app.Application;
-import android.os.Bundle;
 
 import com.parse.Parse;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseTwitterUtils;
+
 
 /**
- * Created by Kendrick Cline on 7/24/14.
- */
+* Created by Kendrick Cline on 7/24/14.
+*/
 public class MainApplication extends Application {
 
     @Override
